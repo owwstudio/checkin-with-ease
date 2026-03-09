@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-03-09T17:51:28.718622",
+  "total_branches": 2,
+  "merge_sequence": [
+    {
+      "order": 1,
+      "branch": "claude/youthful-murdock",
+      "priority": 3,
+      "score": 60.0,
+      "features": []
+    }
+  ],
+  "consolidated_learnings": {
+    "Clean code quality": [
+      "claude/youthful-murdock"
+    ],
+    "Low complexity": [
+      "claude/youthful-murdock"
+    ]
+  },
+  "all_recommendations": [
+    {
+      "branch": "claude/youthful-murdock",
+      "features": [],
+      "priority": 3,
+      "estimated_coverage_gain": 100,
+      "estimated_bug_reduction": 0,
+      "risk_level": "Low",
+      "specific_learnings": [
+        "Clean code quality",
+        "Low complexity"
+      ],
+      "score": 60.0
+    }
+  ]
+}
