@@ -12,10 +12,12 @@
 - [x] Implement Time Validation logic (9-5)
 - [x] Build Check-in UI
 - [x] Vibe & Polish UI (Glassmorphism, animations)
+- [x] Change time separator to colon (:)
 
 ## 🧠 Technical Decisions
 - **Styling:** Decided to use Vanilla CSS to maximize control and achieve the premium design requirement avoiding generic tailwind defaults.
 - **Clock:** Real-time clock will run on a 1000ms interval in a custom hook.
+- **Time formatting:** Modified id-ID locale output to use colon (:) as separator instead of default dot (.).
 
 ## 🚧 Roadblocks & Solutions
 - (None yet)
