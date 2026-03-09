@@ -12,9 +12,10 @@
 - [x] Implement Time Validation logic (9-5)
 - [x] Build Check-in UI
 - [x] Vibe & Polish UI (Glassmorphism, animations)
+- [x] Change theme to GitHub Dark style
 
 ## 🧠 Technical Decisions
-- **Styling:** Decided to use Vanilla CSS to maximize control and achieve the premium design requirement avoiding generic tailwind defaults.
+- **Styling:** Decided to use Vanilla CSS to maximize control and achieve the premium design requirement avoiding generic tailwind defaults. Updated color palette and variables to closely match the GitHub Dark UI defaults.
 - **Clock:** Real-time clock will run on a 1000ms interval in a custom hook.
 
 ## 🚧 Roadblocks & Solutions

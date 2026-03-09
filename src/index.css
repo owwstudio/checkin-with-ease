@@ -70,11 +70,8 @@ body {
 
 .app-title {
   font-size: 2.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
 }
 
@@ -95,7 +92,7 @@ body {
   font-size: 3.5rem;
   font-weight: 600;
   letter-spacing: 2px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .clock-date {
@@ -111,12 +108,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
 }
 
 .status-card.active {
-  border-color: rgba(16, 185, 129, 0.3);
-  background: rgba(16, 185, 129, 0.05);
+  border-color: var(--success-color);
+  background: rgba(35, 134, 54, 0.1);
 }
 
 .status-label {
@@ -161,40 +160,41 @@ body {
   width: 100%;
   padding: 1.2rem;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 500;
   font-family: inherit;
-  color: white;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  border: none;
+  color: #ffffff;
+  background-color: var(--success-color);
+  border: 1px solid rgba(240, 246, 252, 0.1);
+  border-radius: 6px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 12px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+  transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
+  transition-property: color, background-color, box-shadow, border-color;
 }
 
 .checkin-btn:hover:not(.disabled) {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 25px rgba(37, 99, 235, 0.4);
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  background-color: #2ea043;
+  border-color: rgba(240, 246, 252, 0.1);
 }
 
 .checkin-btn:active:not(.disabled) {
-  transform: translateY(0);
+  background-color: #238636;
 }
 
 .checkin-btn.checked-in {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
   cursor: default;
 }
 
 .checkin-btn.disabled {
-  background: rgba(255, 255, 255, 0.05);
+  background-color: var(--bg-secondary);
   color: var(--text-secondary);
-  border: 1px solid var(--glass-border);
+  border-color: var(--border-color);
   box-shadow: none;
   cursor: not-allowed;
   transform: none;
@@ -206,12 +206,12 @@ body {
 
 .error-message {
   text-align: center;
-  color: var(--danger-color);
+  color: #ff8182;
   font-size: 0.9rem;
-  background: rgba(239, 68, 68, 0.1);
+  background: rgba(218, 54, 51, 0.1);
   padding: 10px;
-  border-radius: 8px;
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 6px;
+  border: 1px solid rgba(218, 54, 51, 0.2);
   animation: fadeIn 0.3s ease;
 }
 
