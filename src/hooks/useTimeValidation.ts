@@ -15,8 +15,10 @@ export const useTimeValidation = () => {
     }, []);
 
     const currentHour = currentTime.getHours();
-    // Valid if >= 9:00:00 and < 17:00:00. This logic means 17:00 is locked (since users must check in *before* 5 PM)
-    const isAllowed = currentHour >= WORK_START_HOUR && currentHour < WORK_END_HOUR;
+    // Valid if >= 9:00:00 and < 17:00:00. This logic means 17:00 is locked for check-in
+    const isCheckInAllowed = currentHour >= WORK_START_HOUR && currentHour < WORK_END_HOUR;
+    // Check-out allowed anytime after work start
+    const isCheckOutAllowed = currentHour >= WORK_START_HOUR;
 
-    return { currentTime, isAllowed };
+    return { currentTime, isCheckInAllowed, isCheckOutAllowed };
 };
