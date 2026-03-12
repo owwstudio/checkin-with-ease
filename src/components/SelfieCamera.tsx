@@ -21,10 +21,12 @@ export const SelfieCamera: React.FC<SelfieCameraProps> = ({ onCapture, onCancel,
             
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
-                setIsStreaming(true);
+                setTimeout(() => setIsStreaming(true), 0);
             }
         } catch (err) {
-            setError('Akses kamera ditolak atau tidak tersedia. Harap berikan izin akses kamera.');
+            setTimeout(() => {
+                setError('Akses kamera ditolak atau tidak tersedia. Harap berikan izin akses kamera.');
+            }, 0);
             console.error('Error accessing camera:', err);
         }
     }, []);

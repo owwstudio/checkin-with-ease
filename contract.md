@@ -82,6 +82,19 @@ Sistem menampilkan waktu berjalan secara real-time dan mengevaluasi status (Dala
 - Typography: Menggunakan font modern (misal: 'Inter' atau 'Outfit').
 - Transisi: Hover efek pada tombol, transisi disable/enable dengan animasi smooth.
 
+### Feature 2: Monthly Attendance Calendar
+**Priority:** Medium
+**Status:** Completed
+
+**Description:**
+Sistem menampilkan grid kalender per-bulan yang menunjukkan riwayat presensi harian dengan skema warna yang informatif.
+
+**Acceptance Criteria:**
+- [x] Menampilkan Hari dan matrik tanggal (Minggu - Sabtu).
+- [x] Menggunakan warna Hijau untuk Hadir, Kuning untuk Terlambat, Merah untuk Alpha (Mangkir), dan Biru untuk Cuti.
+- [x] Menyediakan fungsi khusus "Ajukan Cuti/Izin".
+- [x] Otomatis menandai "Alpha" jika tidak absen pada hari kerja yang sudah lalu.
+
 ---
 
 ## 🔐 CODE STANDARDS

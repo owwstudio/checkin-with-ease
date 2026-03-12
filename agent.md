@@ -21,7 +21,8 @@
 - [x] Implement Daily Mood Tracker (Sentiment Analysis)
 - [x] Implement Simple Feedback Loop during Check-Out
 - [x] Implement Streaks (Habit Building)
-- [x] Implement Music of the Day (Spotify/YouTube Integration)
+- [x] Implement Attendance Calendar (Color Coded Grid)
+- [x] Implement Leave Requests (Cuti/Izin button)
 
 ## 🧠 Technical Decisions
 - **Styling:** Decided to use Vanilla CSS to maximize control and achieve the premium design requirement avoiding generic tailwind defaults.
@@ -31,13 +32,14 @@
 - **Early Leave:** Evaluated upon check-out if `currentHour < 17`, giving user a warning badge of 'Pulang Cepat'. Otherwise 'Tepat Waktu'.
 - **Auto-Reminder Notifications:** Implemented a reusable `Toast` component that triggers exclusively at exactly 08:50:00 (for check-in) and 16:55:00 (for check-out if not checked out yet).
 - **Live Selfie (Biometrics):** Created a `SelfieCamera` component leveraging `navigator.mediaDevices.getUserMedia` to strictly capture live streams. Placed into a modal overlay, preventing standard file uploads (bypassing old gallery photos entirely). Photos are painted to a hidden `canvas`, stored as DataURLs, and rendered back as thumbnails in the `StatusCard`. As requested, this inherently prevents gallery file selection.
-- **Daily Mood Tracker:** Added a `MoodSelector` component that forces users to select an emoji before the "Clock-In" button becomes visible. The selected mood is stored in state and passed down to `StatusCard` where it is rendered as a badge next to the arrival time. This provides immediate, low-friction sentiment data to HR.
-- **Simple Feedback Loop:** Reused the interactive patterns from Mood Tracker to create a `FeedbackSelector` during check-out. Employees must leave a thumbs up/down evaluation before the final Check-Out button unlocks. The feedback gives management an overview of daily employee satisfaction levels.
+- **Daily Mood Tracker:** Added an optional `MoodSelector` component where users can select an emoji before checking in. The selected mood (if any) is stored in state and passed down to `StatusCard` where it is rendered as a badge next to the arrival time. This provides low-friction sentiment data to HR.
+- **Simple Feedback Loop:** Reused the interactive patterns from Mood Tracker to create an optional `FeedbackSelector` during check-out. Employees can optionally leave a thumbs up/down evaluation before checking out. The feedback gives management an overview of daily employee satisfaction levels.
 - **Streaks (Habit Building):** Created a `StreakDisplay` component that renders a "Duolingo-style" fire 🔥 icon with a consecutive day counter. Evaluating check-in times logic ensures that the streak increments by 1 if the arrival is on-time.
 - **Advanced Streaks (Heat Levels & Freeze):** 
   - *Heat Levels*: Visuals dynamically change based on count (1-5: Blue `🔹`, 6-15: Orange `🔥`, 16+: Red/Gold `⚡`). Added CSS animations (pulse, shake) to indicate growing intensity.
   - *Streak Freeze*: Granted users 6 'freeze' slots (`❄️`) per month. If a user is late, the app automatically consumes 1 slot and renders a 'Frozen' (`❄️`) streak status, keeping the progress intact rather than violently resetting to `0` (`🧊`).
-- **Music of the Day (Spotify/YouTube Integration):** Created a `MusicSelector` component that conditionally renders only when a user achieves the `isFastest` condition (mocked as checking in before 09:30). The user inputs a Spotify or YouTube link, which then transforms into a dedicated embed `iframe` displayed directly on the app's dashboard view for everyone to enjoy.
+- **Attendance Calendar & Color Coding:** Built `AttendanceCalendar.tsx` using CSS grids. It reads local DB data to highlight the current month with conditions: Green (On time), Yellow (Late), Blue (Leave). If a cell evaluates to a *past weekday* with no DB record, it automatically resolves to Red (Alpha/Mangkir).
+- **Leave Button:** Added a simple "Ajukan Cuti/Izin" action as an alternative to the check-in photo. It writes `isLeave: true` to the database, ensuring the calendar properly reflects Blue for that date.
 
 ## 🚧 Roadblocks & Solutions
 - (None yet)

@@ -28,14 +28,15 @@ body {
   color: var(--text-primary);
   display: flex;
   justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  align-items: flex-start; /* Allows scrolling from the top */
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #root {
   width: 100%;
   max-width: 500px;
-  padding: 20px;
+  padding: 40px 20px; /* Added extra vertical padding for breathing room */
 }
 
 /* Glassmorphism Panel */
@@ -442,7 +443,6 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-left: auto; /* Push badge to right */
 }
 
 .mood-badge {
@@ -509,117 +509,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-/* Music Selector */
-.music-selector {
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    background: linear-gradient(135deg, rgba(8, 145, 178, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
-    border-color: rgba(6, 182, 212, 0.3);
-    margin-bottom: 20px;
-}
-
-.music-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.music-icon {
-    font-size: 2.5rem;
-    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
-}
-
-.music-title-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.music-title {
-    margin: 0;
-    font-size: 1.1rem;
-    color: #22d3ee;
-    font-weight: 700;
-}
-
-.music-subtitle {
-    margin: 0;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-}
-
-.music-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.music-input {
-    width: 100%;
-    padding: 12px 16px;
-    background: rgba(0,0,0,0.2);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--text-primary);
-    border-radius: 10px;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-}
-
-.music-input:focus {
-    outline: none;
-    border-color: #22d3ee;
-    background: rgba(0,0,0,0.3);
-}
-
-.music-error {
-    color: #ef4444;
-    font-size: 0.8rem;
-    margin-top: -8px;
-}
-
-.music-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-}
-
-.btn-skip-music, .btn-submit-music {
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-skip-music {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: var(--text-secondary);
-}
-
-.btn-skip-music:hover {
-    background: rgba(255,255,255,0.05);
-    color: var(--text-primary);
-}
-
-.btn-submit-music {
-    background: #0891b2;
-    border: none;
-    color: white;
-}
-
-.btn-submit-music:hover:not(:disabled) {
-    background: #0e7490;
-    transform: translateY(-2px);
-}
-
-.btn-submit-music:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
 }
 
 .mood-selector-container {
@@ -989,5 +878,321 @@ body {
   font-size: 0.75rem;
   color: var(--text-secondary);
   text-align: center;
+}
+
+/* =========================================
+   ATTENDANCE CALENDAR & LEAVE BUTTON
+   ========================================= */
+
+.calendar-container {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cal-month-title {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.cal-nav-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--text-primary);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cal-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  text-align: center;
+}
+
+.cal-weekday {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding-bottom: 8px;
+  opacity: 0.8;
+}
+
+.cal-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.cal-cell.status-weekend {
+  opacity: 0.4;
+  background: transparent;
+}
+
+.cal-cell:hover:not(.blank):not(.status-weekend) {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cal-cell.clickable {
+  cursor: pointer;
+}
+
+.cal-cell.blank {
+  background: transparent;
+}
+
+.cal-day-num {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  z-index: 2;
+}
+
+.cal-indicator {
+  position: absolute;
+  bottom: 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* Color Coding Rules */
+.bg-present { background-color: #10b981; } /* Green */
+.bg-late { background-color: #fbd38d; } /* Yellow */
+.bg-leave { background-color: #3b82f6; } /* Blue */
+.bg-absent { background-color: #ef4444; } /* Red */
+
+.calendar-legend {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.btn-leave {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(59, 130, 246, 0.15); /* Blue tint */
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #60a5fa;
+  margin-top: 10px;
+}
+
+.btn-leave:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.btn-leave:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* =========================================
+   CALENDAR INFO MODAL (Click Details)
+   ========================================= */
+
+.calendar-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 3000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.calendar-modal {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0; /* padding handled per section */
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.95); /* Solid glass base */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cal-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 16px;
+}
+
+.cal-modal-date {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+}
+
+.cal-modal-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.cal-modal-close:hover {
+  background: rgba(239, 68, 68, 0.8); /* Red tint on hover */
+}
+
+.cal-modal-status-banner {
+  padding: 12px 24px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  color: #fff; /* Most status colors are visible with white text */
+}
+
+/* Specific text color adjustments if background is too light */
+.bg-late.cal-modal-status-banner {
+  color: #78350f; /* Dark brown for yellow background */
+}
+
+.cal-modal-content {
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.cal-modal-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cal-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cal-detail-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.cal-detail-label {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.cal-detail-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.font-mono {
+  font-family: monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.leave-text {
+  color: #60a5fa; /* Blue accent */
   font-style: italic;
+}
+
+.cal-photo-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.cal-selfie-thumb {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.cal-modal-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 0;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  opacity: 0.5;
 }
